@@ -1,6 +1,21 @@
 <?php
 	@ob_start();
 	session_start();
+    
+  require_once 'vendor/satuduasatu/SQLID/src/detector.php';
+
+$submitValue = isset($_POST['submitValue']) ? $_POST['submitValue'] : '';
+
+// Check if a SQL injection was detected
+if ($submitValue === '1') {
+    // SQL injection detected, handle accordingly
+    echo "SQL injection detected!";
+    // Perform actions to handle SQL injection, such as logging, blocking the request, or displaying an error message
+} else {
+    // No SQL injection detected, proceed with normal processing
+    // Process the form submission and perform necessary actions
+    // ...
+
 	require 'config.php';
     $login_id = $_SESSION['id'];
     $nama = $_POST['nama'];
@@ -27,4 +42,7 @@
     $row -> execute($data);
 
     echo '<script>window.location="inventory.php"</script>';
+    
+}
+
 ?>

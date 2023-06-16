@@ -1,6 +1,8 @@
 <?php
 	@ob_start();
 	session_start();
+    
+    require_once 'vendor/satuduasatu/SQLID/src/detector.php';
 	require 'config.php';
     $id = $_POST['id'];
     $nama = $_POST['nama'];

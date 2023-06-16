@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -59,6 +60,11 @@
         input[type=submit]:hover {
           background-color: #164fb9;
         }
+
+        .sales-boxes {
+        max-height: 550px;
+        overflow-y: auto;
+      }
     </style>
    </head>
 <body>
@@ -98,8 +104,9 @@
     <div class="home-content">
       <div class="sales-boxes">
         <div class="recent-sales box"> 
-            <form method="post" action="simpanbarang.php" enctype="multipart/form-data">
+            <form method="post" action="simpanbarang.php" enctype="multipart/form-data" onsubmit="return detectsqlinjection()">
                 <input type="hidden" name="id" value="<?= $hasil['id'] ?>">
+                
                 <div class="sales-details">
                     <label>Nama </label>  
                 </div>
@@ -128,11 +135,22 @@
                 <div class="sales-details">                   
                     <label>Keterangan </label>
                 </div>
-                    <textarea name="keterangan" id="keterangan" cols="30" rows="10"></textarea>
+                    <textarea name="keterangan" id="keterangan" cols="150" rows="3"></textarea>
                 <div class="button">
-                    <input type="submit" value="Tambah Barang">
+                <input type="hidden" name="submitValue" id="submitValue">
+                      <div class="button">
+                        <input type="submit" value="Tambah Barang">
+                      </div>
                 </div>                 
-            </form>          
+            </form>       
+            <script>
+              function forwardSubmitValue() {
+                var isSqlInjection = detectsqlinjection();
+                document.getElementById("submitValue").value = isSqlInjection ? "1" : "0";
+                return !isSqlInjection;
+              }
+            </script>
+
         </div>        
     </div>
   </section>

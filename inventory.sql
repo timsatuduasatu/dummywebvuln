@@ -56,30 +56,18 @@ CREATE TABLE `login` (
   `nama` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `role`  varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`id`, `nama`, `alamat`, `username`, `password`) VALUES
-(1, 'admins', 'Yogyakarta', 'admin', 'admin'),
-(5, 'Tes Akun', 'Jogjakarta', 'tes', 'tes'),
-(6, 'tes', 'tes', 'tes', 'tes'),
-(7, '', '', '', ''),
-(8, '', '', '', ''),
-(9, '', '', '', ''),
-(10, '', '', '', ''),
-(11, '', '', '', ''),
-(12, '', '', '', ''),
-(13, '', '', '', ''),
-(14, '', '', '', ''),
-(15, '', '', '', ''),
-(16, '', '', '', ''),
-(17, '', '', '', ''),
-(18, '', '', '', ''),
-(19, '', '', '', '');
+INSERT INTO `login` (`id`, `nama`, `alamat`, `username`, `password`, `role`) VALUES
+(1, 'admins', 'Yogyakarta', 'admin', 'admin', 'admin'),
+(2, 'Tes Akun', 'Jogjakarta', 'tes', 'tes', 'user'),
+(3, 'tes', 'tes', 'tes', 'tes','user');
 
 --
 -- Indexes for dumped tables

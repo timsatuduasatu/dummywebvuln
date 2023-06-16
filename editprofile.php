@@ -1,15 +1,17 @@
 <?php
-	@ob_start();
-	session_start();
-    require 'config.php';
-    $id = $_SESSION['id'];
-    $sql = 'select * from login where id =?';
-    $row = $config->prepare($sql);
-    $row -> execute(array($id));
-    $jum = $row -> rowCount();
-    if($jum > 0){
-        $hasil = $row -> fetch();
-    }
+@ob_start();
+session_start();
+require 'config.php';
+
+$id = $_SESSION['id'];
+
+$sql = "SELECT * FROM login WHERE id = $id";
+$result = $config->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    $hasil = $result->fetch_assoc();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -18,31 +20,64 @@
     <link rel="stylesheet" href="asset/admin-style.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
+    <style> input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        input[type=date] {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        .status-radio{
+          width: 100%;
+          padding: 12px 20px 12px 0px;
+          margin: 8px 0;
+          display: inline-block;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+
+        .gambar-input{
+          width: 100%;
+          padding: 12px 20px 12px 0px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
         }
 
         input[type=submit] {
-        width: 100%;
-        background-color: #114097;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+          width: 100%;
+          background-color: #114097;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
         }
 
         input[type=submit]:hover {
-        background-color: #164fb9;
+          background-color: #164fb9;
         }
+
+        .sales-boxes {
+        max-height: 550px;
+        overflow-y: auto;
+      }
     </style>
    </head>
 <body>

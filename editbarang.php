@@ -1,13 +1,25 @@
 <?php
 	@ob_start();
 	session_start();
-    require 'config.php';
-    $id = $_GET['id'];
-    $sql = "select * from barang where id ='$id'";
-    $row = $config->query($sql);
-    if($row->num_rows > 0){
-        $hasil = $row -> fetch();
-    }
+  require 'config.php';
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM barang WHERE id = ?";
+  $stmt = $config->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  
+  if ($result->num_rows > 0) {
+      $hasil = $result->fetch_assoc();
+      // Process the fetched data here
+      // ...
+  } else {
+      // Handle the case when no records are found
+      // ...
+  }
+  
+  $stmt->close();
+  
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -18,13 +30,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
         }
 
         input[type=date] {
@@ -57,19 +69,24 @@
         }
 
         input[type=submit] {
-        width: 100%;
-        background-color: #114097;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+          width: 100%;
+          background-color: #114097;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
         }
 
         input[type=submit]:hover {
-        background-color: #164fb9;
+          background-color: #164fb9;
         }
+
+        .sales-boxes {
+        max-height: 550px;
+        overflow-y: auto;
+      }
     </style>
    </head>
 <body>
@@ -139,7 +156,7 @@
                 <div class="sales-details">                   
                     <label>Keterangan </label>
                 </div>
-                    <textarea name="keterangan" id="keterangan" cols="30" rows="10"></textarea>
+                    <textarea name="keterangan" id="keterangan" cols="150" rows="3"></textarea>
                 <div class="button">
                     <input type="submit" value="Update Barang">
                 </div>                 

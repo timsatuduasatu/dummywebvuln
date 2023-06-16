@@ -2,6 +2,7 @@
 	@ob_start();
 	session_start();
 	require 'config.php';
+    
     $id = $_GET['id'];
 
     $sql = "DELETE FROM barang WHERE id='$id'";

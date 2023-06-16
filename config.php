@@ -2,7 +2,7 @@
 date_default_timezone_set("Asia/Jakarta");
 	$host 	= 'localhost'; 
 	$user 	= 'root';  
-	$pass 	= 'root'; 
+	$pass 	= 'ana12345'; 
 	$dbname = 'inventory'; 
 	
 	try{
